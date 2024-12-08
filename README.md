@@ -45,6 +45,8 @@ pipenv run python -m pytest
 
 # Project Demo Video
 
+https://drive.google.com/file/d/1nf5-W6epGMuU6F3t-LRjyqIovHbAVeRX/view?usp=sharing
+
 
 # Functions
 
@@ -100,6 +102,42 @@ These are integrated into display_results() and handle the creation of interacti
 ## Feedback Handling
 
 Within the /results route, feedback submitted by users is captured and logged for further analysis. This feature ensures that user insights can be incorporated into future refinements of the application.
+
+# Visualizations and Graphs
+
+The web application provides three distinct visualizations to help users explore and understand the incident data effectively. Each visualization is dynamically generated using the data extracted from the uploaded PDFs, ensuring that the results are tailored to the specific input. Below are the details of the three visualizations:
+
+### 1. Clustering Scatter Plot
+
+- Purpose: This scatter plot groups incidents based on their nature, allowing users to identify patterns and relationships between different types of incidents.
+
+- How It Works: Clustering is performed using the KMeans algorithm to group similar incidents into clusters.
+PCA (Principal Component Analysis) reduces the data to two dimensions, making it easier to visualize the clusters.
+Each cluster is represented by a different color, with points in the scatter plot corresponding to individual incidents.
+
+- Interactivity: Users can hover over the points to see detailed information about specific incidents, such as the incident number, date/time, and location. Zoom and pan tools allow users to explore the visualization in detail.
+
+- Insights: This plot is particularly useful for identifying common types of incidents and understanding how they relate to one another.
+
+### 2. Comparison Bar Graph
+
+- Purpose: This bar graph compares the frequency of different incident types, providing a clear view of the most and least common incidents.
+
+- How It Works: The application calculates the frequency of each type of incident from the extracted data. The incidents are displayed as bars, sorted by frequency. The height of each bar corresponds to the number of occurrences for that incident type.
+
+- Interactivity: Hovering over a bar reveals the exact count of incidents for that type. Users can quickly identify patterns, such as which types of incidents occur most frequently.
+
+- Insights: This graph helps users understand the overall distribution of incidents and prioritize resources or focus areas based on incident frequency.
+
+### 3. Pie Chart – Incident Distribution
+
+- Purpose: This pie chart visualizes the proportional distribution of incidents across different clusters, offering a high-level overview of the data.
+
+- How It Works: The incidents are grouped into clusters (using the same clusters as in the scatter plot), and the proportions of each cluster are calculated. Each slice of the pie chart represents a cluster, with the size of the slice corresponding to the percentage of incidents in that cluster. Colors are assigned to slices to differentiate clusters visually.
+
+- Interactivity: Hovering over a slice displays the cluster number and the exact number of incidents in that cluster. The chart allows users to focus on specific segments by hovering or zooming in.
+
+- Insights: This chart is useful for identifying which clusters dominate the dataset and understanding the overall distribution of incidents.
 
 
 # Test Cases
