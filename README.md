@@ -30,7 +30,6 @@ To run the project, ensure you have all dependencies installed and activate your
 
 ```
 pipenv run python app.py
-
 ```
 Once the server is running, open a web browser and navigate to:
 
@@ -42,7 +41,6 @@ To run the test cases, execute the following command:
 
 ```
 pipenv run python -m pytest
-
 ```
 
 # Project Demo Video
@@ -62,20 +60,21 @@ This function takes the URL of a NormanPD-style incident PDF, downloads it, and 
 
 This function processes the binary PDF data using the pypdf library and extracts the following fields using regular expressions:
 
-### Date/Time
-### Incident Number
-### Location
-### Nature of the Incident
-### ORI
+- Date/Time
+- Incident Number
+- Location
+- Nature of the Incident
+- ORI
+
 The extracted data is returned as a list of dictionaries, where each dictionary corresponds to a single incident.
 
 ## display_results()
 
 A Flask route (/results) that handles data visualization and feedback submission. It retrieves processed data from the session, performs clustering using KMeans and PCA, and generates three visualizations:
 
-### A scatter plot for incident clustering.
-### A bar graph comparing the frequency of different incident types.
-### A pie chart showing the proportional distribution of incidents across clusters.
+- A scatter plot for incident clustering.
+- A bar graph comparing the frequency of different incident types.
+- A pie chart showing the proportional distribution of incidents across clusters.
 
 The visualizations are created using Bokeh and embedded into the web interface.
 
@@ -83,8 +82,8 @@ The visualizations are created using Bokeh and embedded into the web interface.
 
 A Flask route (/) that serves as the home page for the application. It provides a form for users to:
 
-### Upload PDF files.
-### Enter URLs pointing to NormanPD incident PDFs.
+- Upload PDF files.
+- Enter URLs pointing to NormanPD incident PDFs.
 
 This route handles input validation, calls fetchincidents() and extractincidents() as needed, and stores the extracted data in the session for further processing.
 
@@ -92,11 +91,11 @@ This route handles input validation, calls fetchincidents() and extractincidents
 
 These are integrated into display_results() and handle the creation of interactive plots using Bokeh:
 
-### Clustering Plot: Uses KMeans and PCA to display incident clusters based on their nature.
+- Clustering Plot: Uses KMeans and PCA to display incident clusters based on their nature.
 
-### Bar Graph: Displays the frequency of various incident types, sorted by occurrence.
+- Bar Graph: Displays the frequency of various incident types, sorted by occurrence.
 
-### Pie Chart: Visualizes the proportional distribution of incidents across clusters. Uses cumsum to calculate angles for each slice.
+- Pie Chart: Visualizes the proportional distribution of incidents across clusters. Uses cumsum to calculate angles for each slice.
 
 ## Feedback Handling
 
@@ -111,10 +110,10 @@ The tests are located in the tests/ directory. Each function is tested individua
 
 ## test_fetchincidents.py
 
-### Purpose: 
+#### Purpose: 
 Tests the fetchincidents() function to ensure it can successfully download a PDF file from the provided URL.
 
-### Test Case:
+#### Test Case:
 
 The test mocks the URL and simulates downloading the data. The response is a mock object that mimics a real PDF download.
 It verifies that the function correctly handles HTTP requests and retrieves data.
@@ -122,11 +121,11 @@ It verifies that the function correctly handles HTTP requests and retrieves data
 
 ## test_extractincidents.py
 
-### Purpose: 
+#### Purpose: 
 
 Tests the extractincidents() function to ensure accurate extraction of incident data from a downloaded PDF.
 
-### Test Case:
+#### Test Case:
 
 The test provides sample incident PDF data, including both typical and edge-case scenarios (e.g., missing fields or malformed data).
 It verifies that the function correctly extracts key fields (date/time, incident number, location, nature of the incident, ORI) and handles edge cases such as missing or incomplete information.
@@ -134,17 +133,17 @@ It verifies that the function correctly extracts key fields (date/time, incident
 
 # External Resources
 
-### Flask Documentation:
+#### Flask Documentation:
 Official Flask documentation was used to understand routing, creating endpoints, handling file uploads, and serving static files.
 
 Link: https://flask.palletsprojects.com/
 
-### Bokeh Documentation:
+#### Bokeh Documentation:
 The Bokeh documentation was crucial for creating interactive visualizations like scatter plots, bar graphs, and pie charts.
 
 Link: https://docs.bokeh.org/
 
-### Stack Overflow:
+#### Stack Overflow:
 Multiple solutions and discussions on Stack Overflow helped troubleshoot issues, such as file upload handling, regular expression queries, and Flask configuration challenges.
 
 Link: https://stackoverflow.com/
@@ -153,30 +152,30 @@ Link: https://stackoverflow.com/
 
 ## Bugs
 
-### PDF Parsing Inconsistencies:
+#### PDF Parsing Inconsistencies:
 The pypdf library may sometimes struggle with non-standard or poorly formatted PDFs, leading to incomplete or inaccurate data extraction. This is especially true for PDFs with complex layouts or embedded images, which can affect text parsing.
 
-### Data Overlap in Incident Fields:
+#### Data Overlap in Incident Fields:
 In some cases, the extraction of multiple fields (e.g., date, location, incident number) from the same line or section in the PDF may result in data misalignment or duplication. This can occasionally lead to incorrect or missing data for certain incidents.
 
-### Visualization Rendering Delays:
+#### Visualization Rendering Delays:
 When a large number of incidents are processed, the interactive visualizations (e.g., scatter plot, pie chart) may experience rendering delays or performance issues, particularly when displaying large datasets. This could affect user experience in cases of significant data volume.
 
 ## Assumptions
 
-### Standardized PDF Format:
+#### Standardized PDF Format:
 The project assumes that the incident PDF files are formatted consistently according to the structure used by the Norman Police Department. Any deviation from this format (e.g., changes in layout or field names) may cause issues with data extraction.
 
-### Valid Incident Data:
+#### Valid Incident Data:
 It is assumed that the incident data in the PDF files is complete and follows a standard structure. Missing or malformed data (such as incomplete incident numbers or invalid dates) may not be handled perfectly by the current implementation.
 
-### User Interaction:
+#### User Interaction:
 The web interface assumes users will upload PDFs or provide valid URLs. If a user uploads unsupported file types (e.g., non-PDF documents) or invalid URLs, the application may not handle these errors gracefully, and additional error handling may be required.
 
-### Data Integrity:
+#### Data Integrity:
 The system assumes that the extracted incident data is free from significant errors or corruption, as it relies on the integrity of the source PDF for accurate data extraction. Issues with the source files (such as corrupted or encrypted PDFs) may result in incomplete data extraction or errors in the final database.
 
-### Basic Browser Compatibility:
+#### Basic Browser Compatibility:
 The web application assumes basic compatibility with modern browsers (Chrome, Firefox, etc.). Users with outdated browsers or certain privacy settings may encounter issues with rendering visualizations or uploading files.
 
 
