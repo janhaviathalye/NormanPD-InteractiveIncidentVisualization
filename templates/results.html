@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incident Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- Bokeh CSS and JS -->
+    <link href="https://cdn.bokeh.org/bokeh/release/bokeh-3.2.1.min.css" rel="stylesheet" type="text/css">
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-3.2.1.min.js"></script>
+    
+    {{ script|safe }}
+</head>
+<body>
+    <div class="container">
+        <h1>Incident Visualizations</h1>
+
+        {% if error %}
+            <div class="alert error">{{ error }}</div>
+        {% else %}
+            {% if div %}
+                <div class="plot-section">
+                    {{ div|safe }}
+                </div>
+            {% else %}
+                <div class="alert error">No visualizations to display.</div>
+            {% endif %}
+        {% endif %}
+
+        <section class="feedback-section">
+            <h2>Submit Feedback</h2>
+            {% if feedback_submitted %}
+                <div class="alert success">Thank you for your feedback!</div>
+            {% else %}
+                <form action="/results" method="post">
+                    <textarea name="feedback" rows="5" placeholder="Leave your feedback here..."></textarea>
+                    <button type="submit" class="btn-submit">Submit Feedback</button>
+                </form>
+            {% endif %}
+        </section>
+
+        <a href="{{ url_for('home') }}" class="btn-back">Go Back</a>
+    </div>
+</body>
+</html>

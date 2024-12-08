@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Incident PDFs</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Norman PD Incident Visualization</h1>
+        <form action="/" method="post" enctype="multipart/form-data">
+            <div class="form-section">
+                <label for="urls">Enter one or more PDF URLs (space-separated):</label>
+                <input type="text" id="urls" name="urls" placeholder="https://example.com/file1.pdf https://example.com/file2.pdf">
+            </div>
+
+            <div class="form-section">
+                <label for="files">Upload one or more PDF files:</label>
+                <input type="file" id="files" name="files" multiple accept=".pdf">
+            </div>
+
+            <button type="submit" class="btn-submit">Submit</button>
+        </form>
+
+        {% if error %}
+            <div class="alert error">{{ error }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>
